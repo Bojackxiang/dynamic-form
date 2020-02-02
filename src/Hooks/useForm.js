@@ -18,15 +18,11 @@ export default formFormat => {
   // note: isSubmitted 
   let [isSubmit, setIsSubmit] = useState(false)
 
-  // note: this useEffect is used as debuged
-  useEffect(() => {
-    console.log(checkboxStatus);
-  }, [checkboxStatus]);
-
+  // useEffect for error checking
   useEffect(() => {
     console.log(errors);
-    // todo: submit the data here 
   }, [errors])
+
 
   // note: handling the form change
   const _formChangeHandler = event => {

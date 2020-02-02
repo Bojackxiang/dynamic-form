@@ -10,7 +10,8 @@ const inputGenerator = (
   item,
   _formChangeHandler,
   formValues,
-  checkboxStatus
+  checkboxStatus,
+  errors
 ) => {
   switch (item.type) {
     // note: general text input
@@ -95,7 +96,8 @@ const Form = ({ formFormat }) => {
     _formChangeHandler,
     _formSubmitHandler,
     formValues,
-    checkboxStatus
+    checkboxStatus,
+    errors
   } = useForm(formFormat);
 
   // note: form generator
@@ -116,8 +118,29 @@ const Form = ({ formFormat }) => {
     );
   };
 
+  const errorDisplay = (error) => {
+    console.log('error handle');
+    if (Object.keys(error).length > 0){
+      Object.keys(error).forEach(key => {
+        console.log(typeof(error[key]));
+        if (typeof(error[key]) === 'object'){
+          console.log(key);
+        }else{
+          console.log(key);
+        }
+      })
+    }
+    
+
+  }
+
   // note: return components
-  return <div>{formGenerator(formFormat)}</div>;
+  return (
+    <div>
+      <div>{errorDisplay(errors)}</div>
+      {formGenerator(formFormat)}
+    </div>
+  );
 };
 
 export default Form;
