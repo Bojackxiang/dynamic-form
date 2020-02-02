@@ -70,5 +70,5 @@ export default formFormat => {
   };
 
   // note: return the function and default value to the components
-  return { _formChangeHandler, _formSubmitHandler, formValues, checkboxStatus, errors };
-};
+  return { _formChangeHandler,  _formSubmitHandler, formValues, checkboxStatus, errors };
+}; 
