@@ -7,6 +7,9 @@ export default formFormat => {
   // note: initial all the default values basing on the form format
   let [formValues, setFormValues] = useState(defaultFormValue(formFormat));
 
+  // note: errors 
+  let [errors, setErrors] = useState({})
+
   // note: get all check box value
   let [checkboxStatus, setCheckBoxStatus] = useState(
     defaultCheckbox(formFormat)
@@ -19,6 +22,11 @@ export default formFormat => {
   useEffect(() => {
     console.log(checkboxStatus);
   }, [checkboxStatus]);
+
+  useEffect(() => {
+    console.log(errors);
+    // todo: submit the data here 
+  }, [errors])
 
   // note: handling the form change
   const _formChangeHandler = event => {
@@ -61,9 +69,10 @@ export default formFormat => {
   const _formSubmitHandler = event => {
     event.preventDefault();
     setIsSubmit(true)
-    let isFormValidated = formValidator(formValues, checkboxStatus)
+    let updatedErrors = formValidator(formValues, checkboxStatus)
+    setErrors(updatedErrors)
   };
 
   // note: return the function and default value to the components
-  return { _formChangeHandler, _formSubmitHandler, formValues, checkboxStatus };
+  return { _formChangeHandler, _formSubmitHandler, formValues, checkboxStatus, errors };
 };

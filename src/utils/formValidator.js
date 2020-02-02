@@ -40,7 +40,5 @@ export default (formValues, checkboxStatus) => {
     }
   });
 
-  console.log(errors);
-
-  return true;
+  return errors;
 };
