@@ -25,14 +25,17 @@ export default (formValues, checkboxStatus) => {
         if (!ageChecker(formValues[item.id])) errors[item.id] = false;
       }
     } else {
-      if (item.id.indexOf(Object.keys(checkboxStatus)) > -1) {
+      if (item.id.indexOf(Object.keys(checkboxStatus)) > -1 && checkboxStatus[item.id] === true) {
         // * 如果是true就要检查fields里面有没有填写好
         const firstClass = item.id;
-        console.log(firstClass);
-        item.fields.map(item => {
-          // 在这里检查formvalues
-          console.log(formValues[firstClass][item]);
+        let tempErr = {}
+        item.fields.map(fieldItem => {
+            console.log(fieldItem, requiredValueChecker(formValues[firstClass][fieldItem]));
+            if (requiredValueChecker(formValues[firstClass][fieldItem]) === false){
+                tempErr[fieldItem] = false
+            };
         });
+        errors[item.id] = tempErr
       }
     }
   });
